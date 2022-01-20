@@ -10,22 +10,22 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
   <body>
-    <div id="root"></div>
+    <ul id="root"></ul>
 
     <script type="text/babel">
   
       class HelloMessage extends React.Component {
         render() {
             return (
-            <div>
+            <li>
                 Hello {this.props.name}
-            </div>
+            </li>
             );
         }
       }
 
       ReactDOM.render(
-        <HelloMessage name="Rising and Striving Developer!" />,
+        <><HelloMessage name="Rising and Striving Developer!" /><HelloMessage name="Keep Moving Forward!" /></>,
         document.getElementById('root')
       );
 
