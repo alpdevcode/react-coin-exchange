@@ -24,17 +24,13 @@
     <script type="text/babel">
   
 
-      class Coin extends React.Component {
-        render() {
-          return (
-            <tr>
-              <td>{this.props.name}</td>
-              <td>{this.props.ticker}</td>
-              <td>{this.props.price}</td> 
-            </tr>
-          );
-        }
-      }
+      const Coin = ({name, ticker, price}) => (
+        <tr>
+         <td>{name}</td>
+         <td>{ticker}</td>
+         <td>{price}</td> 
+        </tr>
+      );
 
       ReactDOM.render(
         <>
@@ -43,6 +39,7 @@
           <Coin name="Binance Coin" ticker="BNB" price="$300" />
           <Coin name="Cardano" ticker="ADA" price="$1" />
           <Coin name="Solana" ticker="BNB" price="$100" />
+          <Coin name="Polkadot" ticker="DOT" price="$19" />
         </>,
         document.getElementById('table-body')
       );
