@@ -1,2 +1,2 @@
-# react-tic-tac-toe
-Building Tic-Tac-Toe using React
+# react-coin-exchange
+Building Coin Exchange using React
