@@ -1,5 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
+import logo from './logo.svg';
+import Coin from './components/Coin/Coin';
 
 function App() {
   return (
@@ -9,15 +10,24 @@ function App() {
         <h1>
           Coin Exchange
         </h1>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <table className="table-coin">
+        <thead>
+          <tr>
+            <td>Name</td>
+            <td>Ticker</td>
+            <td>Price</td>
+          </tr>
+        </thead>
+        <tbody>
+          <Coin name="Bitcoin" ticker="BTC" price={35000} />
+          <Coin name="Ethereum" ticker="BTC" price={3000} />
+          <Coin name="Binance Coin" ticker="BNB" price={300} />
+          <Coin name="Cardano" ticker="ADA" price={1} />
+          <Coin name="Solana" ticker="BNB" price={100} />
+          <Coin name="Polkadot" ticker="DOT" price={19} />
+        </tbody>
+      </table>
     </div>
   );
 }
