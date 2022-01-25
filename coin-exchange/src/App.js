@@ -16,7 +16,7 @@ function App() {
           <tr>
             <td>Name</td>
             <td>Ticker</td>
-            <td>Price</td>
+            <td>Price($)</td>
           </tr>
         </thead>
         <tbody>
