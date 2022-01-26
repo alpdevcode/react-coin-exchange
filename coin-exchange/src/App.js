@@ -64,12 +64,12 @@ export default class App extends Component {
             </tr>
           </thead>
           <tbody>
-            <Coin name={this.state.coinData[0].name} ticker={this.state.coinData[0].ticker} price={this.state.coinData[0].price} />
-            <Coin name={this.state.coinData[1].name} ticker={this.state.coinData[1].ticker} price={this.state.coinData[1].price} />
-            <Coin name={this.state.coinData[2].name} ticker={this.state.coinData[2].ticker} price={this.state.coinData[2].price} />
-            <Coin name={this.state.coinData[3].name} ticker={this.state.coinData[3].ticker} price={this.state.coinData[3].price} />
-            <Coin name={this.state.coinData[4].name} ticker={this.state.coinData[4].ticker} price={this.state.coinData[4].price} />
-            <Coin name={this.state.coinData[5].name} ticker={this.state.coinData[5].ticker} price={this.state.coinData[5].price} />
+            {
+              this.state.coinData.map(
+                ({name, ticker, price}) => 
+                  <Coin key={ticker} name={name} ticker={ticker} price={price} />
+              )
+            }
           </tbody>
         </table>
       </div>
