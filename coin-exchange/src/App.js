@@ -1,8 +1,8 @@
 import './App.css';
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import Coin from './components/Coin/Coin';
+import CoinHeader from './components/CoinHeader/CoinHeader';
 import AccountBalance from './components/AccountBalance/AccountBalance';
+import CoinList from './components/CoinList/CoinList';
 
 export default class App extends Component {
 
@@ -48,30 +48,9 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>
-            Coin Exchange
-          </h1>
-        </header>
+        <CoinHeader />
         <AccountBalance amount={this.state.balance} />
-        <table className="table-coin">
-          <thead>
-            <tr>
-              <td>Name</td>
-              <td>Ticker</td>
-              <td>Price($)</td>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              this.state.coinData.map(
-                ({name, ticker, price}) => 
-                  <Coin key={ticker} name={name} ticker={ticker} price={price} />
-              )
-            }
-          </tbody>
-        </table>
+        <CoinList coinData={this.state.coinData} />
       </div>
     );
   }
