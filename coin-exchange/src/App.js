@@ -43,6 +43,28 @@ export default class App extends Component {
         },
       ],
     }
+    this.handleRefresh = this.handleRefresh.bind(this);
+  }
+
+  handleRefresh(tickerChangeValue) {
+
+    const newCoinData = this.state.coinData.map( ({name, ticker, price}) =>
+      {
+        let newPrice = price;
+        if (ticker === tickerChangeValue) {
+          const randomPercent = 0.99 + Math.random() * 0.01;
+          newPrice = price * randomPercent;
+        }
+
+        return {
+          name,
+          ticker,
+          price: newPrice,
+        }
+      }
+    )
+
+    this.setState( {coinData: newCoinData} )
   }
 
   render() {
@@ -50,7 +72,7 @@ export default class App extends Component {
       <div className="App">
         <CoinHeader />
         <AccountBalance amount={this.state.balance} />
-        <CoinList coinData={this.state.coinData} />
+        <CoinList coinData={this.state.coinData} handleRefresh={this.handleRefresh} />
       </div>
     );
   }
