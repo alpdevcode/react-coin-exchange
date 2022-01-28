@@ -12,9 +12,9 @@ export default class CoinList extends Component {
   render() {
     let tableBalance = null;
 
-if (this.props.showBalance) {
-  tableBalance = <td>Balance</td>;
-}
+    if (this.props.showBalance) {
+      tableBalance = <td>Balance</td>;
+    }
 
     return (
       <TableCoin>
@@ -29,8 +29,8 @@ if (this.props.showBalance) {
         <tbody>
           {
             this.props.coinData.map(
-               ({name, ticker, balance, price}) => 
-               <Coin key={ticker} name={name} ticker={ticker} balance={balance} price={price} handleRefresh={this.props.handleRefresh} showBalance={this.props.showBalance} />
+                ({name, ticker, balance, price}) => 
+                <Coin key={ticker} name={name} ticker={ticker} balance={balance} price={price} handleRefresh={this.props.handleRefresh} showBalance={this.props.showBalance} />
             )
           }
         </tbody>
