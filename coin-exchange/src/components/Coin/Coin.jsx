@@ -22,10 +22,17 @@ export default class Coin extends Component {
   }
 
   render() {
+    let tableDetailCoinBalance = null;
+
+  if (this.props.showBalance) {
+    tableDetailCoinBalance = <TableDetailCoin>{this.props.balance}</TableDetailCoin>;
+  }
+
     return (        
         <tr>
             <TableDetailCoin>{this.props.name}</TableDetailCoin>
             <TableDetailCoin>{this.props.ticker}</TableDetailCoin>
+            {tableDetailCoinBalance}
             <TableDetailCoin>{this.props.price}</TableDetailCoin>
             <TableDetailCoin>
               <form action="#" method="post">
