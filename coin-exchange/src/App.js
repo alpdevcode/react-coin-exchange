@@ -5,7 +5,12 @@ import AccountBalance from './components/AccountBalance/AccountBalance';
 import CoinList from './components/CoinList/CoinList';
 import axios from 'axios';
 
-const COIN_COUNT = 15;
+const COIN_COUNT = 10;
+
+// Coinpaprika API URLs
+const COIN_LIST = 'https://api.coinpaprika.com/v1/coins';
+const COIN_DTL = 'https://api.coinpaprika.com/v1/tickers/';
+
 export default class App extends Component {
   
   state = {
@@ -14,20 +19,20 @@ export default class App extends Component {
     showBalance: true,
   }
 
-  componentDidMount() {
-    axios.get('https://api.coinpaprika.com/v1/coins')
-      .then( (response) => {
-        let coinData = response.data.slice(0, COIN_COUNT).map( (coin) => {
-          return {
-            key:      coin.id,
-            name:     coin.name,
-            ticker:   coin.symbol,
-            balance:  0,
-            price:    0,
-          }
-        });
-        this.setState( {coinData} );
-      })
+  componentDidMount = async () => {
+    const response = await axios.get(COIN_LIST);
+    const coinIds = response.data.slice(0, COIN_COUNT).map(coin => coin.id);
+    const coinList = await Promise.all(coinIds.map( id => axios.get(COIN_DTL + id) ) );
+    const coinData = coinList.map( ({data}) => {
+      return {
+        key:      data.id,
+        name:     data.name,
+        ticker:   data.symbol,
+        balance:  0,
+        price:    parseFloat(Number(data.quotes['USD'].price).toFixed(3)),
+      }
+    });
+    this.setState( {coinData} );
   }
 
   handleRefresh = (tickerChangeValue) => {
@@ -58,8 +63,16 @@ export default class App extends Component {
     return (
       <div className="App">
         <CoinHeader />
-        <AccountBalance amount={this.state.balance} showBalance={this.state.showBalance} handleDisplayBalance={this.handleDisplayBalance} />
-        <CoinList coinData={this.state.coinData} handleRefresh={this.handleRefresh} showBalance={this.state.showBalance} />
+        <AccountBalance 
+          amount={this.state.balance} 
+          showBalance={this.state.showBalance} 
+          handleDisplayBalance={this.handleDisplayBalance} 
+        />
+        <CoinList 
+          coinData={this.state.coinData} 
+          handleRefresh={this.handleRefresh} 
+          showBalance={this.state.showBalance} 
+        />
       </div>
     );
   }
