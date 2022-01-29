@@ -11,6 +11,9 @@ const COIN_COUNT = 10;
 const COIN_LIST = 'https://api.coinpaprika.com/v1/coins';
 const COIN_DTL = 'https://api.coinpaprika.com/v1/tickers/';
 
+// Utility Functions
+const formatPrice = (price) => parseFloat(Number(price).toFixed(3));
+
 export default class App extends Component {
   
   state = {
@@ -29,20 +32,21 @@ export default class App extends Component {
         name:     data.name,
         ticker:   data.symbol,
         balance:  0,
-        price:    parseFloat(Number(data.quotes['USD'].price).toFixed(3)),
+        price:    formatPrice(data.quotes['USD'].price),
       }
     });
     this.setState( {coinData} );
   }
 
-  handleRefresh = (tickerChangeValue) => {
+  handleRefresh = async (keyUpdateValue) => {
 
+    const coinUpdatedResult = await axios.get(COIN_DTL + keyUpdateValue);
+    const coinUpdatedPrice = formatPrice(coinUpdatedResult.data.quotes['USD'].price);
     const newCoinData = this.state.coinData.map( (coinValues) =>
       {
         let newPrice = coinValues.price;
-        if (coinValues.ticker === tickerChangeValue) {
-          const randomPercent = 0.99 + Math.random() * 0.01;
-          newPrice = coinValues.price * randomPercent;
+        if (coinValues.key === keyUpdateValue) {
+          newPrice = coinUpdatedPrice;
         }
 
         return {
