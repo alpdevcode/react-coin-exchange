@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import styled from 'styled-components';
 
@@ -18,8 +18,7 @@ const Img = styled.img`
     pointer-events: none;
 `;
 
-export default class CoinHeader extends Component {
-  render() {
+export default function CoinHeader() {
     return (
       <Header>
         <Img src={logo} alt="logo" />
@@ -28,5 +27,4 @@ export default class CoinHeader extends Component {
         </h1>
       </Header>
     );
-  }
 }
