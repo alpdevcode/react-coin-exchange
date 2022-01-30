@@ -5,7 +5,7 @@ import AccountBalance from './components/AccountBalance/AccountBalance';
 import CoinList from './components/CoinList/CoinList';
 import axios from 'axios';
 
-const COIN_COUNT = 15;
+const COIN_COUNT = 10;
 
 // Coinpaprika API URLs
 const COIN_LIST = 'https://api.coinpaprika.com/v1/coins';
