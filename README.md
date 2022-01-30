@@ -1,2 +1,2 @@
 # react-coin-exchange
-Building Coin Exchange using React
+Building a Coin Portfolio using React
