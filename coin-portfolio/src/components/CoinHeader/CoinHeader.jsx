@@ -23,7 +23,7 @@ export default function CoinHeader() {
       <Header>
         <Img src={logo} alt="logo" />
         <h1>
-          Coin Exchange
+          Coin Portfolio
         </h1>
       </Header>
     );
