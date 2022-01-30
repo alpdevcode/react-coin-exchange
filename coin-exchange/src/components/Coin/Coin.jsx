@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -7,35 +7,32 @@ const TableDetailCoin = styled.td`
   width: 25vh;
 `;
 
-export default class Coin extends Component {
+export default function Coin(props) {
 
-  handleClick = (event) => {
+  const handleClick = (event) => {
     event.preventDefault();
 
-    this.props.handleRefresh(this.props.id);
+    props.handleRefresh(props.id);
   }
 
-  render() {
-    let tableDetailCoinBalance = null;
-
-  if (this.props.showBalance) {
-    tableDetailCoinBalance = <TableDetailCoin>{this.props.balance}</TableDetailCoin>;
+  let tableDetailCoinBalance = null;
+  if (props.showBalance) {
+    tableDetailCoinBalance = <TableDetailCoin>{props.balance}</TableDetailCoin>;
   }
 
-    return (        
-        <tr>
-            <TableDetailCoin>{this.props.name}</TableDetailCoin>
-            <TableDetailCoin>{this.props.ticker}</TableDetailCoin>
-            {tableDetailCoinBalance}
-            <TableDetailCoin>{this.props.price}</TableDetailCoin>
-            <TableDetailCoin>
-              <form action="#" method="post">
-                <button onClick={this.handleClick}>Refresh</button>
-              </form>
-            </TableDetailCoin>
-       </tr>
-    );
-  }
+  return (        
+      <tr>
+          <TableDetailCoin>{props.name}</TableDetailCoin>
+          <TableDetailCoin>{props.ticker}</TableDetailCoin>
+          {tableDetailCoinBalance}
+          <TableDetailCoin>{props.price}</TableDetailCoin>
+          <TableDetailCoin>
+            <form action="#" method="post">
+              <button onClick={handleClick}>Refresh</button>
+            </form>
+          </TableDetailCoin>
+      </tr>
+  );
 }
 
 Coin.propTypes = {
