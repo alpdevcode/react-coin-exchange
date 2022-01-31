@@ -4,7 +4,17 @@ import styled from 'styled-components';
 
 const TableDetailCoin = styled.td`
   border: 1px solid #cccccc;
-  width: 25vh;
+  width: 15vw;
+`;
+
+const TableDetailCoinAction = styled(TableDetailCoin)`
+  width 20vw;
+`;
+
+const Button = styled.button`
+  font-size: 11px;
+  margin: 5px 5px;
+  width: 72px;
 `;
 
 export default function Coin(props) {
@@ -15,22 +25,24 @@ export default function Coin(props) {
     props.handleRefresh(props.id);
   }
 
-  let tableDetailCoinBalance = null;
+  let tableDetailCoinBalance = '-';
   if (props.showBalance) {
-    tableDetailCoinBalance = <TableDetailCoin>{props.balance}</TableDetailCoin>;
+    tableDetailCoinBalance = <>{props.balance}</>;
   }
 
   return (        
       <tr>
           <TableDetailCoin>{props.name}</TableDetailCoin>
           <TableDetailCoin>{props.ticker}</TableDetailCoin>
-          {tableDetailCoinBalance}
           <TableDetailCoin>{props.price}</TableDetailCoin>
-          <TableDetailCoin>
+          <TableDetailCoin>{tableDetailCoinBalance}</TableDetailCoin>
+          <TableDetailCoinAction>
             <form action="#" method="post">
-              <button onClick={handleClick}>Refresh</button>
+              <Button onClick={handleClick} className='btn-primary'>Refresh</Button>
+              <Button onClick={handleClick} className='btn-warning'>Buy</Button>
+              <Button onClick={handleClick} className='btn-danger'>Sell</Button>
             </form>
-          </TableDetailCoin>
+          </TableDetailCoinAction>
       </tr>
   );
 }

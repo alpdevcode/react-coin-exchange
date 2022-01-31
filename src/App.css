@@ -3,3 +3,7 @@
   background-color: rgb(38, 38, 102);
   color: #cccccc;
 }
+
+#root {
+  min-width: 500px;
+}

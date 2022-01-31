@@ -5,20 +5,43 @@ import styled from 'styled-components';
 const Section = styled.section`
   color: rgb(121, 209, 121);
   text-align: right;
-  padding: 1rem 3rem 1rem 0rem;
+  padding: 1.5rem 0 1.5rem 5rem;
 `;
+
+const Button = styled.button`
+  margin: 0px 10px;
+`;
+
+const ToggleButton = styled(Button)`
+  width: 170px;
+`;
+
+var formatter = Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
 
 export default function AccountBalance(props) {
   const balanceButtonText = props.showBalance ? 'Hide Balance' : 'Show Balance';
 
-  let accountBalance = null;
+  const buttonClass = 'btn ' + (props.showBalance ? 'btn-warning' : 'btn-primary');
+  // Placeholder text
+  let accountBalance = '\u00A0';
+
   if (props.showBalance) {
-    accountBalance = <>Your Balance: {props.amount}</>;
+    accountBalance = <>Your Balance: {formatter.format(props.amount)}</>;
   }
 
-  return (<Section>
+  return (
+          
+          <Section>
             {accountBalance}
-            <button onClick={props.handleDisplayBalance}>{balanceButtonText}</button>
+            <ToggleButton onClick={props.handleDisplayBalance} className={buttonClass}>
+              {balanceButtonText}
+            </ToggleButton>
+            <Button className='btn btn-info' onClick={props.handleAddBalance}>
+              <i className="fas fa-tint"></i>
+            </Button>
           </Section>
   );
 }

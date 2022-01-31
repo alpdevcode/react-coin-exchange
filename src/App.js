@@ -5,6 +5,11 @@ import AccountBalance from './components/AccountBalance/AccountBalance';
 import CoinList from './components/CoinList/CoinList';
 import axios from 'axios';
 
+// Styling
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootswatch/dist/materia/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/js/all';
+
 const COIN_COUNT = 10;
 
 // Coinpaprika API URLs
@@ -19,7 +24,7 @@ export default function App(props) {
 
   const [balance, setBalance] = useState(10000);
   const [coinData, setCoinData] = useState([]);
-  const [showBalance, setShowBalance] = useState(true);
+  const [showBalance, setShowBalance] = useState(false);
 
   const componentDidMount = async () => {
     const response = await axios.get(COIN_LIST);
@@ -42,6 +47,10 @@ export default function App(props) {
       componentDidMount();
     }
   });
+
+  const handleAddBalance = () => {
+    setBalance( oldBalance => oldBalance + 250 );
+  }
 
   const handleRefresh = async (keyUpdateValue) => {
 
@@ -74,7 +83,8 @@ export default function App(props) {
       <AccountBalance 
         amount={balance} 
         showBalance={showBalance} 
-        handleDisplayBalance={handleDisplayBalance} 
+        handleDisplayBalance={handleDisplayBalance}
+        handleAddBalance={handleAddBalance}
       />
       <CoinList 
         coinData={coinData} 
